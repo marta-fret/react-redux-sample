@@ -17,6 +17,7 @@ const addProduct = ({ id, product: name, price, description = '' } = {}) => {
   return {
     type: actionTypes.ADD_PRODUCT,
     product: {
+      id,
       name,
       price,
       description,

@@ -11,6 +11,7 @@ module.exports = {
   rules: {
     'import/first': 'off',
     'comma-dangle': ['error', 'always-multiline'],
-    quotes: ['error', 'single', { allowTemplateLiterals: true }]
+    quotes: ['error', 'single', { allowTemplateLiterals: true }],
+    'react/prop-types': 'off',
   }
 };
