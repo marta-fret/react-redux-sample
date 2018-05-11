@@ -1,6 +1,10 @@
 import actionTypes from './actions';
 
-const defaultState = [];
+const defaultState = {
+  items: [],
+  totalPrice: 0,
+  totalAmount: 0
+};
 
 const cartReducer = (state = defaultState, action) => {
   switch (action.type) {
@@ -16,32 +20,40 @@ const cartReducer = (state = defaultState, action) => {
 const addToCart = (state, action) => {
   let added = false;
 
-  const newState = state.map(item => {
-    if (item.productId === action.productId) {
-      added = true;
-      return { ...item, count: item.count + 1 };
-    } else {
-      return item;
-    }
-  });
+  const newState = {
+    totalPrice: state.totalPrice + action.product.price,
+    totalAmount: state.totalAmount + 1,
+    items: state.items.map(item => {
+      if (item.id === action.product.id) {
+        added = true;
+        return { ...item, count: item.count + 1 };
+      } else {
+        return item;
+      }
+    })
+  };
 
   if (!added) {
-    newState.push({ productId: action.productId, count: 1 });
+    newState.items.push({ ...action.product, count: 1 });
   }
 
   return newState;
 };
 
 const removeFromCart = (state, action) => {
-  const newState = [];
+  const newState = {
+    items: [],
+    totalAmount: state.totalAmount - 1,
+  };
 
-  state.forEach(item => {
-    if (item.productId === action.productId) {
+  state.items.forEach(item => {
+    if (item.id === action.productId) {
       if (item.count > 1) {
-        newState.push({ ...item, count: item.count - 1 });
+        newState.items.push({ ...item, count: item.count - 1 });
       }
+      newState.totalPrice = state.totalPrice - item.price;
     } else {
-      newState.push(item);
+      newState.items.push(item);
     }
   });
 

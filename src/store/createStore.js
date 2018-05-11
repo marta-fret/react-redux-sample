@@ -1,10 +1,8 @@
 import { createStore, combineReducers } from 'redux';
-import productsReducer from './products/reducer';
 import cartReducer from './cart/reducer';
 
 export default () => (
-  createStore(combineReducers({
-    products: productsReducer, 
+  createStore(combineReducers({ // Notice: combineReducers for future use
     cart: cartReducer,
   }))
 );

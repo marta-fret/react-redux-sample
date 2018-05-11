@@ -3,15 +3,18 @@ const actionTypes = {
   REMOVE_FROM_CART: 'REMOVE_FROM_CART',
 };
 
-const addToCart = (productId) => ({
+const addToCart = ({ id, name, price }) => ({
   type: actionTypes.ADD_TO_CART,
-  productId,
+  product: {
+    id,
+    name,
+    price,
+  },
 });
 
-const removeFromCart = (productId) => ({
+const removeFromCart = productId => ({
   type: actionTypes.REMOVE_FROM_CART,
   productId,
 });
 
 export { actionTypes as default, addToCart, removeFromCart };
-

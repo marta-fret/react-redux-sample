@@ -4,7 +4,7 @@ import './menu.less';
 
 const menuItems = [
   { name: 'Products', NavLinkTo: '/' },
-  { name: 'Shopping cart', NavLinkTo: '/cart', noExact: true }
+  { name: 'Shopping cart', NavLinkTo: '/cart', noExact: true },
 ];
 
 const Menu = () => (

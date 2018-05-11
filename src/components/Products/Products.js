@@ -1,7 +1,38 @@
-import React from 'react';
+import React, { Component } from 'react';
+import Product from './../Product/Product';
 
-const Products = () => (
-  <p>Products</p>
-);
+export default class Products extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      products: [],
+    };
+  }
 
-export default Products;
+  componentDidMount() {
+    fetch('https://api.myjson.com/bins/vajmu')
+      .then(response => response.json())
+      .then(products => {
+        products.forEach(product => {
+          product.name = product.product;
+          delete product.product;
+        });
+
+        this.setState(() => ({
+          products,
+        }));
+      });
+  }
+
+  render() {
+    return (
+      <div>
+        {!this.state.products.length && <p>Loading...</p>}
+        {!!this.state.products.length &&
+          this.state.products.map(product => (
+            <Product key={product.id} product={product} />
+          ))}
+      </div>
+    );
+  }
+}
