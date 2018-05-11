@@ -3,12 +3,12 @@ const actionTypes = {
   REMOVE_FROM_CART: 'REMOVE_FROM_CART',
 };
 
-const addToCart = ({ id: productId = '' } = {}) => ({
+const addToCart = (productId) => ({
   type: actionTypes.ADD_TO_CART,
   productId,
 });
 
-const removeFromCart = ({ id: productId = '' } = {}) => ({
+const removeFromCart = (productId) => ({
   type: actionTypes.REMOVE_FROM_CART,
   productId,
 });

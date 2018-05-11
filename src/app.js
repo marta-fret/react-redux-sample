@@ -1,12 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
+import createStore from './store/createStore';
 import AppRouter from './routes/AppRouter';
 import 'normalize.css/normalize.css';
 import './styles/general.less';
 
-// TODO: remove this temporary test
-fetch('https://api.myjson.com/bins/vajmu')
-.then(response => response.json())
-.then(json => {console.log(json)});
+const store = createStore();
 
-ReactDOM.render(<AppRouter />, document.getElementById('app'));
+const app = (
+  <Provider store={store}>
+    <AppRouter />
+  </Provider>
+);
+
+ReactDOM.render(app, document.getElementById('app'));
