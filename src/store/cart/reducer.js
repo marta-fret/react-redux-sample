@@ -3,7 +3,7 @@ import actionTypes from './actions';
 const defaultState = {
   items: [],
   totalPrice: 0,
-  totalAmount: 0
+  totalAmount: 0,
 };
 
 const cartReducer = (state = defaultState, action) => {
@@ -30,7 +30,7 @@ const addToCart = (state, action) => {
       } else {
         return item;
       }
-    })
+    }),
   };
 
   if (!added) {
@@ -48,7 +48,7 @@ const removeFromCart = (state, action) => {
 
   state.items.forEach(item => {
     if (item.id === action.productId) {
-      if (item.count > 1) {
+      if (!action.completely && item.count > 1) {
         newState.items.push({ ...item, count: item.count - 1 });
       }
       newState.totalPrice = state.totalPrice - item.price;

@@ -12,9 +12,10 @@ const addToCart = ({ id, name, price }) => ({
   },
 });
 
-const removeFromCart = productId => ({
+const removeFromCart = (productId, completely = false) => ({
   type: actionTypes.REMOVE_FROM_CART,
   productId,
+  completely,
 });
 
 export { actionTypes as default, addToCart, removeFromCart };
