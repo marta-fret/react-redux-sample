@@ -2,7 +2,7 @@ import actionTypes from './actions';
 
 const defaultState = {
   items: [],
-  totalPrice: 0,
+  totalSum: 0,
   totalAmount: 0,
 };
 
@@ -21,7 +21,7 @@ const addToCart = (state, action) => {
   let added = false;
 
   const newState = {
-    totalPrice: state.totalPrice + action.product.price,
+    totalSum: state.totalSum + action.product.price,
     totalAmount: state.totalAmount + 1,
     items: state.items.map(item => {
       if (item.id === action.product.id) {
@@ -43,15 +43,11 @@ const addToCart = (state, action) => {
 const removeFromCart = (state, action) => {
   const newState = {
     items: [],
-    totalAmount: state.totalAmount - 1,
   };
 
   state.items.forEach(item => {
     if (item.id === action.productId) {
-      if (!action.completely && item.count > 1) {
-        newState.items.push({ ...item, count: item.count - 1 });
-      }
-      newState.totalPrice = state.totalPrice - item.price;
+      updateStateForRemovingItem(newState, state, item, action.completely);
     } else {
       newState.items.push(item);
     }
@@ -59,5 +55,18 @@ const removeFromCart = (state, action) => {
 
   return newState;
 };
+
+const updateStateForRemovingItem = (newState, oldState, item, completely) => {
+  if (completely) {
+    newState.totalAmount = oldState.totalAmount - item.count;        
+    newState.totalSum = oldState.totalSum - (item.price * item.count);
+  } else {
+    newState.totalAmount = oldState.totalAmount - 1;        
+    newState.totalSum = oldState.totalSum - item.price;
+    if (item.count > 1) {
+      newState.items.push({ ...item, count: item.count - 1 });
+    }
+  }
+}
 
 export default cartReducer;

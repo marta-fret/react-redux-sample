@@ -65,7 +65,7 @@ class Cart extends Component {
                   <td></td>
                   <td></td>
                   <td>{this.props.totalAmount}</td>
-                  <td>{this.props.totalPrice}</td>
+                  <td>{this.props.totalSum}</td>
                   <td></td>
                 </tr>
               </tbody>
@@ -80,7 +80,7 @@ class Cart extends Component {
 
 const mapStateToProps = state => ({
   cartItems: state.cart.items,
-  totalPrice: state.cart.totalPrice,
+  totalSum: state.cart.totalSum,
   totalAmount: state.cart.totalAmount,
 });
 
