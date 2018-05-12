@@ -33,7 +33,7 @@ class Cart extends Component {
         )}
         {!!this.props.cartItems.length && (
           <div>
-            <p>List of the products:</p>
+            <h1 className="page-header">Content of your cart</h1>
             <table>
               <thead>
                 <tr>

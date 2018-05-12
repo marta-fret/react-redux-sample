@@ -1,0 +1,62 @@
+@import '../../styles/theme.less';
+
+@table-radius: 3px;
+
+.product-tile {
+  width: 20rem;
+  border-spacing: 0;
+  text-align: center;
+  margin: 10px;
+
+  tr {
+    height: 3.8rem;
+  }
+
+  td, th {
+    border: 1px solid #efefef
+  }
+  
+  th {
+    font-size: 1.3rem;
+    font-weight: normal;
+    color: #666666;
+    text-transform: capitalize;
+    letter-spacing: 0.05rem;
+    border-bottom: none;
+    border-radius: @table-radius @table-radius 0 0;
+  }
+
+  td {
+    width:50%;
+    background-color: #f9f9f9;
+
+    &:first-child {
+      border-radius: 0 0 0 @table-radius;
+    }
+
+    &:last-child {
+      border-radius: 0 0 @table-radius 0;
+    }
+  }
+
+  &__price {
+    color: @main-color;
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+
+  &__add-btn {
+    padding: 5px;
+    font-size: 1rem;
+    color: white;
+    background-color: @main-color;
+    border: 1px solid darken(@main-color, 10%);
+    border-radius: @table-radius;
+    outline: none;
+    cursor: pointer;
+
+    &:active {
+      background-color: darken(@main-color, 10%);
+    }
+  }
+}

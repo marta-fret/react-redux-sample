@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Product from './../Product/Product';
+import './products.less';
 
 export default class Products extends Component {
   constructor(props) {
@@ -26,13 +27,16 @@ export default class Products extends Component {
 
   render() {
     return (
-      <div>
-        {!this.state.products.length && <p>Loading...</p>}
-        {!!this.state.products.length &&
-          this.state.products.map(product => (
-            <Product key={product.id} product={product} />
-          ))}
-      </div>
+        <React.Fragment>
+          {!this.state.products.length && <p>Loading...</p>}
+          {!!this.state.products.length && <h1 className="page-header">List of products</h1>}
+          <div className="products">
+            {!!this.state.products.length &&
+              this.state.products.map(product => (
+                <Product key={product.id} product={product} />
+              ))}
+          </div>
+        </React.Fragment>
     );
   }
 }
