@@ -3,3 +3,11 @@ export const classDef = classesConfig => { // eslint-disable-line import/prefer-
     .filter(className => classesConfig[className])
     .join(' ');
 };
+
+export const priceFormatter = (price) => {
+  if (isNaN(Number(price))) { 
+    return '-';
+  }
+
+  return Number(price).toFixed(2);
+}

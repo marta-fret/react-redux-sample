@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { addToCart, removeFromCart } from '../../store/cart/actions';
 import { getRandomElemFromArray } from './../../helpers/general';
+import { priceFormatter } from './../../helpers/forView';
+import './cart.less';
 
 class Cart extends Component {
   buyHandler = productId => {
@@ -34,29 +36,29 @@ class Cart extends Component {
         {!!this.props.cartItems.length && (
           <div>
             <h1 className="page-header">Content of your cart</h1>
-            <table>
+            <table className="cart-items">
               <thead>
                 <tr>
                   <th>Product name</th>
                   <th>Price</th>
                   <th>Amount</th>
                   <th>Sum</th>
-                  <th>Add/Remove</th>
+                  <th>Remove/Add</th>
                 </tr>
               </thead>
               <tbody>
                 {this.props.cartItems.map(item => (
                   <tr key={item.id}>
-                    <td>{item.name}</td>
-                    <td>{item.price}</td>
-                    <td>{item.count}</td>
-                    <td>{item.price * item.count}</td>
-                    <td>
-                      <button onClick={this.getAddToCartHandler(item)}>
-                        +
-                      </button>
-                      <button onClick={this.getRemoveFromCartHandler(item.id)}>
+                    <td className="cart-items__product-col">{item.name}</td>
+                    <td className="cart-items__num-col">{item.price}</td>
+                    <td className="cart-items__num-col">{item.count}</td>
+                    <td className="cart-items__num-col">{priceFormatter(item.price * item.count)}</td>
+                    <td className="cart-items__btn-col">
+                      <button className='btn-main' onClick={this.getRemoveFromCartHandler(item.id)}>
                         -
+                      </button>
+                      <button className='btn-secondary' onClick={this.getAddToCartHandler(item)}>
+                        +
                       </button>
                     </td>
                   </tr>
@@ -64,13 +66,12 @@ class Cart extends Component {
                 <tr>
                   <td></td>
                   <td></td>
-                  <td>{this.props.totalAmount}</td>
-                  <td>{this.props.totalSum}</td>
-                  <td></td>
+                  <td className="cart-items__num-col">{this.props.totalAmount}</td>
+                  <td className="cart-items__num-col">{priceFormatter(this.props.totalSum)}</td>
+                  <td><button className='btn-secondary btn-buy' onClick={this.buyHandler}>Buy</button></td>
                 </tr>
               </tbody>
             </table>
-            <button onClick={this.buyHandler}>Buy</button>
           </div>
         )}
       </React.Fragment>
