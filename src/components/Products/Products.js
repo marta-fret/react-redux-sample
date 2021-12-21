@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Product from './../Product/Product';
+import productsMockedData from './productsMockedData';
 import './products.less';
 import { classDef } from './../../helpers/forView';
 
@@ -14,18 +15,12 @@ export default class Products extends Component {
   }
 
   componentDidMount() {
-    fetch('https://api.myjson.com/bins/vajmu')
-      .then(response => response.json())
-      .then(products => {
-        products.forEach(product => {
-          product.name = product.product;
-          delete product.product;
-        });
-
-        this.setState(() => ({
-          products,
-        }));
-      });
+    // mock async data loading
+    setTimeout(() => {
+      this.setState(() => ({
+        products: productsMockedData,
+      }));
+    }, 2000);
   }
 
   showDetails = productForDetails => {
@@ -62,19 +57,19 @@ export default class Products extends Component {
         </div>
         <div
           className={classDef({
-            "product-details": true,
-            "product-details--hidden": !this.state.showDetails,
+            'product-details': true,
+            'product-details--hidden': !this.state.showDetails,
           })}
           onClick={this.hideDetails}
         >
-        {this.state.productForDetails && (
-          <div>
-            <h3 className="product-details__header">
-              {this.state.productForDetails.name}
-            </h3>
-            <span>{this.state.productForDetails.description}</span>
-          </div>
-        )}
+          {this.state.productForDetails && (
+            <div>
+              <h3 className="product-details__header">
+                {this.state.productForDetails.name}
+              </h3>
+              <span>{this.state.productForDetails.description}</span>
+            </div>
+          )}
         </div>
       </React.Fragment>
     );
