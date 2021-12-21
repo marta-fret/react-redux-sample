@@ -58,15 +58,15 @@ const removeFromCart = (state, action) => {
 
 const updateStateForRemovingItem = (newState, oldState, item, completely) => {
   if (completely) {
-    newState.totalAmount = oldState.totalAmount - item.count;        
-    newState.totalSum = oldState.totalSum - (item.price * item.count);
+    newState.totalAmount = oldState.totalAmount - item.count;
+    newState.totalSum = oldState.totalSum - item.price * item.count;
   } else {
-    newState.totalAmount = oldState.totalAmount - 1;        
+    newState.totalAmount = oldState.totalAmount - 1;
     newState.totalSum = oldState.totalSum - item.price;
     if (item.count > 1) {
       newState.items.push({ ...item, count: item.count - 1 });
     }
   }
-}
+};
 
 export default cartReducer;

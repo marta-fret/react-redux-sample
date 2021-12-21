@@ -1,6 +1,6 @@
 export const getRandomElemFromArray = array => {
   if (array instanceof Array) {
-    const randomIndex = getRandomInt(0, array.length-1);
+    const randomIndex = getRandomInt(0, array.length - 1);
     return array[randomIndex];
   }
 };

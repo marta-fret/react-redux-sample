@@ -8,7 +8,9 @@ const Product = ({ dispatch, product, onShowDetails }) => (
     <thead>
       <tr>
         <th colSpan="2">
-          <span className="product-tile__name" onClick={onShowDetails}>{product.name}</span>
+          <span className="product-tile__name" onClick={onShowDetails}>
+            {product.name}
+          </span>
         </th>
       </tr>
     </thead>

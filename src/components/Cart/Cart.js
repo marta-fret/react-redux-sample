@@ -17,15 +17,13 @@ class Cart extends Component {
     }, 1000);
   };
 
-  getAddToCartHandler = item => (() => {
-      this.props.dispatch(addToCart(item));
-    }
-  );
+  getAddToCartHandler = item => () => {
+    this.props.dispatch(addToCart(item));
+  };
 
-  getRemoveFromCartHandler = itemId => (() => {
-      this.props.dispatch(removeFromCart(itemId));
-    }
-  );
+  getRemoveFromCartHandler = itemId => () => {
+    this.props.dispatch(removeFromCart(itemId));
+  };
 
   render() {
     return (
@@ -52,12 +50,20 @@ class Cart extends Component {
                     <td className="cart-items__product-col">{item.name}</td>
                     <td className="cart-items__num-col">{item.price}</td>
                     <td className="cart-items__num-col">{item.count}</td>
-                    <td className="cart-items__num-col">{priceFormatter(item.price * item.count)}</td>
+                    <td className="cart-items__num-col">
+                      {priceFormatter(item.price * item.count)}
+                    </td>
                     <td className="cart-items__btn-col">
-                      <button className='btn-main' onClick={this.getRemoveFromCartHandler(item.id)}>
+                      <button
+                        className="btn-main"
+                        onClick={this.getRemoveFromCartHandler(item.id)}
+                      >
                         -
                       </button>
-                      <button className='btn-secondary' onClick={this.getAddToCartHandler(item)}>
+                      <button
+                        className="btn-secondary"
+                        onClick={this.getAddToCartHandler(item)}
+                      >
                         +
                       </button>
                     </td>
@@ -66,9 +72,20 @@ class Cart extends Component {
                 <tr>
                   <td></td>
                   <td></td>
-                  <td className="cart-items__num-col">{this.props.totalAmount}</td>
-                  <td className="cart-items__num-col">{priceFormatter(this.props.totalSum)}</td>
-                  <td><button className='btn-secondary btn-buy' onClick={this.buyHandler}>Buy</button></td>
+                  <td className="cart-items__num-col">
+                    {this.props.totalAmount}
+                  </td>
+                  <td className="cart-items__num-col">
+                    {priceFormatter(this.props.totalSum)}
+                  </td>
+                  <td>
+                    <button
+                      className="btn-secondary btn-buy"
+                      onClick={this.buyHandler}
+                    >
+                      Buy
+                    </button>
+                  </td>
                 </tr>
               </tbody>
             </table>
